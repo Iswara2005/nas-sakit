@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversi celcius Fahrenheit</title>
+    <link rel="stylesheet" href="../boostrp/dist/css/bootstrap.min.css">
+    <style>
+        .jarak {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h3>Konversi suhu celcius Fahrenheit</h3>
+        <select  id="pilihan" class="form-select">
+            <option value="pill" disabled>silahkan pilih opsi</option>
+            <option value="ctof">celcius -> Fahrenheit</option>
+            <option value="ftoc">Fahrenheit -> celcius</option>
+        </select>
+    </div>
+    <div id="c2f">
+        <label class="form-label">Nilai derajat Celcius</label>
+        <input type="text" id="txC" class="form-control">
+    </div>
+    <div id="f2c">
+        <label class="form-label">Nilai Fahrenheit</label>
+        <input type="text" id="txF" class="form-control">
+    </div>
+    <div class="jarak">
+        <span id="txHasil"></span>
+    </div>
+    <div class="jarak">
+        <button id="cmdConvert" class="btn btn-warning">Konversi Nilai</button>
+    </div>
+
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
+    <script>
+    //  Dari C->F = (C x 9/5) + 32
+    // Dari F-> = (F x 9/5) - 32
+    
+    $(function(){
+        var pil=""
+        var txHasil = ""
+        $("select").on('change',function(){
+            pil = $("select").val()
+            if (pil=="ctof"){
+                $("txC").prop("disable",false)
+                $("txF").prop("disable",true)
+            }else {
+                $("txC").prop("disable",true)
+                $("txF").prop("disable",false)
+            }
+        })
+        $("#cmdConvert").on('click',function(){
+            let nC = 0
+            let nF = 0
+            if(pil=="ctof"){
+                nC = $("#txC").val()
+                nF = (nC*9/5)+32
+                txHasil = "<h3>Konversi suhu celcius Fahrenheit</h3>"
+                txHasil += "F = (C x 9/5) + 32<br>"
+                txHasil += "F = ("+nC+" x 9/5) + 32<br>"
+                txHasil += "F = "+nF+
+                $("#txF").val(nF)
+                $("#txHasil").html(txHasil)
+            }
+        })
+    })
+    </script>
+    
+    
+</body>
+</html>
